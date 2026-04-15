@@ -6,4 +6,3 @@ __pycache__/
 EchoMood-Backend/.env
 build/
 dist/
-*.pth
