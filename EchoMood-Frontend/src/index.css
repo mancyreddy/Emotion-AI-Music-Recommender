@@ -1,0 +1,116 @@
+:root {
+  --color-primary: #4300FF;
+  --color-secondary: #0065F8;
+  --color-accent1: #00CAFF;
+  --color-accent2: #00FFDE;
+  --bg: #0b0c12;
+  --surface: #12131a;
+  --text: #e6f2ff;
+}
+
+/* Global reset and layout */
+html, body, #root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Custom scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-secondary) var(--surface);
+}
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--color-secondary), var(--color-accent1)); border-radius: 8px; }
+
+/* Utility classes */
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+}
+
+.brand-gradient {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent1), var(--color-accent2));
+}
+
+/* Fancy navbar animation */
+.navbar-animated {
+  background: linear-gradient(90deg, rgba(67,0,255,0.25), rgba(0,101,248,0.25), rgba(0,202,255,0.25));
+  position: relative;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+.navbar-animated::after {
+  content: '';
+  position: absolute;
+  left: -50%;
+  top: 0;
+  width: 200%;
+  height: 100%;
+  background: radial-gradient( circle at var(--x, 20%) 50%, rgba(0,255,222,0.25), transparent 40% );
+  animation: navbar-shimmer 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes navbar-shimmer {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-25%); }
+}
+
+/* Sidebar subtle gradient and hover ripple */
+.sidebar-animated {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  position: relative;
+}
+.sidebar-animated .MuiListItemButton-root::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,202,255,0.35), transparent 60%);
+  transform: translateY(-50%);
+  transition: width 220ms ease, height 220ms ease, left 220ms ease;
+}
+.sidebar-animated .MuiListItemButton-root:hover::after {
+  width: 120px;
+  height: 120px;
+  left: -20px;
+}
+
+/* Search input focus glow */
+.nav-search .MuiOutlinedInput-notchedOutline {
+  transition: box-shadow 200ms ease;
+}
+.nav-search .Mui-focused .MuiOutlinedInput-notchedOutline {
+  box-shadow: 0 0 0 2px rgba(0,202,255,0.5), 0 6px 20px rgba(67,0,255,0.35);
+  border-color: rgba(0,202,255,0.4);
+}
+
+/* Performance hint for cards */
+.card-3d { will-change: transform; }
+
+/* Card glow on hover */
+.card-3d:hover .glass {
+  box-shadow: 0 12px 50px rgba(0, 202, 255, 0.25), 0 0 0 1px rgba(255,255,255,0.08) inset;
+}
+
+/* Beat visualizer bars */
+.beat-bars {
+  display: inline-flex;
+  gap: 3px;
+  height: 20px;
+  align-items: flex-end;
+}
+.beat-bar {
+  width: 3px;
+  background: linear-gradient(180deg, var(--color-accent1), var(--color-accent2));
+  border-radius: 2px;
+  transition: height 80ms linear;
+}
