@@ -1,4 +1,4 @@
-# EchoMood 🎵🧠
+# EmoTune 🎵🧠
 
 An AI-powered music recommendation platform that uses computer vision to detect your emotion and curates a customized playlist of songs tailored to your mood!
 
