@@ -27,7 +27,7 @@ export default function Login() {
         navigate('/');
       }
     } catch (err) {
-      setError('Login failed');
+      setError(err.response?.data?.detail || err.response?.data?.message || err.message || 'Login failed');
     } finally {
       setLoading(false);
     }

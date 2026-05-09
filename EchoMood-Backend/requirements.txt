@@ -5,3 +5,6 @@ torchvision
 pillow
 motor          # async MongoDB driver
 python-dotenv  # load .env
+python-multipart # for UploadFile in FastAPI
+bcrypt         # for password hashing
+requests       # for Audius API calls

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Use Vite proxy: requests to /users go to backend without CORS preflight
-const api = axios.create({ baseURL: '' });
+// Use VITE_API_URL for production backend, fallback to empty string for Vite proxy
+const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || '' });
 
 export async function login(payload) {
   const { data } = await api.post('/users/login', payload, { headers: { 'Content-Type': 'application/json' } });
@@ -35,7 +35,7 @@ export async function predictFromImage(file) {
   const tryPost = async (fieldName) => {
     const form = new FormData();
     form.append(fieldName, file);
-    const { data } = await api.post('/predict', form, { headers: { 'Content-Type': 'multipart/form-data' } });
+    const { data } = await api.post('/predict', form);
     return data;
   };
   try {

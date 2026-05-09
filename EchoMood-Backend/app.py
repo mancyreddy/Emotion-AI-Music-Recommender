@@ -7,8 +7,18 @@ import io
 from model_def import EchoMoodCNN
 import requests
 from routes.user_routes import router as user_router
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="EchoMood Backend 🧠🎵")
+
+# ✅ Enable CORS for frontend requests
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Adjust this in production to specific domains like ["https://your-frontend.vercel.app"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # ✅ Include user routes
 app.include_router(user_router, prefix="/users", tags=["User"])

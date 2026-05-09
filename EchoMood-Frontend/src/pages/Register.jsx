@@ -28,7 +28,7 @@ export default function Register() {
         navigate('/');
       }
     } catch (err) {
-      setMessage('Registration failed');
+      setMessage(err.response?.data?.detail || err.response?.data?.message || err.message || 'Registration failed');
     } finally {
       setLoading(false);
     }
