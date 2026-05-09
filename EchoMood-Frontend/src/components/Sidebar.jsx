@@ -18,24 +18,11 @@ import { motion } from 'framer-motion';
 
 export default function Sidebar({ collapsed, onToggle }) {
   const navigate = useNavigate();
-  // Read user on each render so route changes after login reflect immediately
-  const user = (() => {
-    try {
-      const raw = localStorage.getItem('user');
-      return raw ? JSON.parse(raw) : null;
-    } catch {
-      return null;
-    }
-  })();
   const links = [
     { to: '/', label: 'Home', icon: <HomeIcon /> },
     { to: '/discover', label: 'Discover', icon: <WhatshotIcon /> },
     { to: '/playlists', label: 'Playlists', icon: <LibraryMusicIcon /> },
-    // Show Echo and Profile only when logged in
-    ...(user ? [
-      { to: '/echo', label: 'Echo Your Mood', icon: <EmojiEmotionsIcon /> },
-      { to: '/profile', label: 'Profile', icon: <PersonIcon /> },
-    ] : []),
+    { to: '/echo', label: 'Echo Your Mood', icon: <EmojiEmotionsIcon /> },
   ];
 
   const width = collapsed ? 72 : 240;

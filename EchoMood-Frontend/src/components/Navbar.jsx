@@ -16,24 +16,14 @@ import { useNavigate } from 'react-router-dom';
 export default function Navbar({ onSearch }) {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
-  const user = useMemo(() => {
-    try {
-      const raw = localStorage.getItem('user');
-      return raw ? JSON.parse(raw) : null;
-    } catch {
-      return null;
-    }
-  }, []);
+
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim()) onSearch?.(query.trim());
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    navigate('/login');
-  };
+
 
   // Debounced navigate on input to make search feel instant
   useEffect(() => {
@@ -78,34 +68,7 @@ export default function Navbar({ onSearch }) {
           </Box>
         </Stack>
         <Stack direction="row" spacing={1} alignItems="center">
-          {user ? (
-            <>
-              <Typography
-                variant="body2"
-                sx={{ mr: 1, cursor: 'pointer' }}
-                title="Open profile"
-                onClick={() => navigate('/profile')}
-              >
-                {user.username}
-              </Typography>
-              <Avatar
-                src={user.profilepic || undefined}
-                alt={user.username}
-                sx={{ bgcolor: 'primary.main', cursor: 'pointer' }}
-                onClick={() => navigate('/profile')}
-                title="Open profile"
-              >
-                {!user.profilepic && user.username ? user.username.charAt(0).toUpperCase() : null}
-              </Avatar>
-              <IconButton color="inherit" onClick={handleLogout} title="Logout">
-                <LogoutIcon />
-              </IconButton>
-            </>
-          ) : (
-            <Typography variant="body2" sx={{ cursor: 'pointer' }} onClick={() => navigate('/login')}>
-              Login
-            </Typography>
-          )}
+          <Avatar sx={{ bgcolor: 'primary.main' }} />
         </Stack>
       </Toolbar>
     </AppBar>
