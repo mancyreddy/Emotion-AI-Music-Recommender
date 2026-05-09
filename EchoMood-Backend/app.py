@@ -15,7 +15,7 @@ app = FastAPI(title="EchoMood Backend 🧠🎵")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Adjust this in production to specific domains like ["https://your-frontend.vercel.app"]
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
